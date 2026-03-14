@@ -16,7 +16,7 @@
     "name": "Platinum Power Wash",
     "description": "Professional house washing and pressure washing services in Orlando, FL.",
     "url": "https://platinumpw.co",
-    "telephone": "+1-XXX-XXX-XXXX",
+    "telephone": "+1-407-504-1577",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Orlando",
@@ -685,9 +685,9 @@
   <header class="top-bar">
     <div class="container top-bar__inner">
       <div class="top-bar__logo">Platinum Power Wash</div>
-      <a href="tel:+1XXXXXXXXXX" class="top-bar__phone" aria-label="Call Platinum Power Wash">
+      <a href="tel:+14075041577" class="top-bar__phone" aria-label="Call Platinum Power Wash">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.1.31.03.66-.25 1.01l-2.2 2.2z"/></svg>
-        (XXX) XXX-XXXX
+        (407) 504-1577
       </a>
     </div>
   </header>
@@ -907,7 +907,7 @@
   <footer class="footer">
     <div class="container">
       <p class="footer__name">Platinum Power Wash</p>
-      <p class="footer__phone"><a href="tel:+1XXXXXXXXXX">(XXX) XXX-XXXX</a></p>
+      <p class="footer__phone"><a href="tel:+14075041577">(407) 504-1577</a></p>
       <p class="footer__badge">Licensed &amp; Insured &bull; Orlando, FL</p>
       <p class="footer__copy">&copy; 2026 Platinum Power Wash. All rights reserved.</p>
     </div>
@@ -998,24 +998,29 @@
         btn.textContent = 'Sending...';
         btn.disabled = true;
 
-        // TODO: Replace with your form endpoint (Formspree, webhook, etc.)
-        // Example with fetch:
-        // fetch('https://formspree.io/f/YOUR_ID', {
-        //   method: 'POST',
-        //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ name: nameVal, phone: phoneVal })
-        // }).then(function(res) {
-        //   if (res.ok) showSuccess(form, nameVal);
-        // }).catch(function() {
-        //   btn.textContent = 'Get My Free Quote →';
-        //   btn.disabled = false;
-        //   alert('Something went wrong. Please call us directly.');
-        // });
+        // n8n webhook endpoint — REPLACE with your actual n8n webhook URL
+        var WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE.app/webhook/YOUR-WEBHOOK-ID';
 
-        // Simulated success for demo (remove when endpoint is added):
-        setTimeout(function() {
-          showSuccess(form, nameVal);
-        }, 800);
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal,
+            phone: phoneVal,
+            source: 'Google Ads - House Washing Orlando',
+            timestamp: new Date().toISOString()
+          })
+        }).then(function(res) {
+          if (res.ok) {
+            showSuccess(form, nameVal);
+          } else {
+            throw new Error('Server error');
+          }
+        }).catch(function() {
+          btn.textContent = 'Get My Free Quote \u2192';
+          btn.disabled = false;
+          alert('Something went wrong. Please call us directly at (407) 504-1577.');
+        });
       }
 
       document.getElementById('lead-form-top').addEventListener('submit', handleSubmit);
