@@ -8,7 +8,7 @@
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,555 +39,644 @@
   </script>
   <style>
     :root {
-      --color-primary: #1B2A4A;
-      --color-primary-dark: #0F1D35;
-      --color-secondary: #C0C0C0;
-      --color-accent: #FF6B35;
-      --color-accent-hover: #E85A25;
-      --color-white: #FFFFFF;
-      --color-text: #333333;
-      --color-text-light: #666666;
-      --color-bg-light: #F5F5F5;
-      --color-star: #FFC107;
-      --font-primary: 'Montserrat', sans-serif;
-      --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
-      --shadow-form: 0 8px 32px rgba(0,0,0,0.18);
-      --radius: 8px;
-      --max-width: 1100px;
+      --navy: #0D1B2A;
+      --navy-mid: #1B2A4A;
+      --navy-light: #243B5E;
+      --silver: #C0C0C0;
+      --orange: #FF6B35;
+      --orange-hover: #E85A25;
+      --orange-glow: rgba(255, 107, 53, 0.35);
+      --white: #FFFFFF;
+      --off-white: #F8F9FA;
+      --light-gray: #F0F2F5;
+      --text: #1A1A2E;
+      --text-mid: #4A4A5A;
+      --text-light: #6B7280;
+      --green: #22C55E;
+      --green-bg: #F0FDF4;
+      --star: #FBBF24;
+      --red: #EF4444;
+      --font: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.2);
+      --radius: 10px;
+      --radius-lg: 16px;
+      --max-w: 1120px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: var(--font-primary);
-      color: var(--color-text);
+      font-family: var(--font);
+      color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    .section-title {
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--color-primary);
-      text-align: center;
-      margin-bottom: 8px;
-      line-height: 1.2;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: var(--color-text-light);
-      font-size: 16px;
-      margin-bottom: 40px;
-    }
-
+    /* ===== CTA BUTTON ===== */
     .btn-cta {
       display: block;
       width: 100%;
-      background: var(--color-accent);
-      color: var(--color-white);
-      font-family: var(--font-primary);
-      font-weight: 700;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font);
+      font-weight: 800;
       font-size: 17px;
-      padding: 16px 32px;
+      padding: 18px 32px;
       border: none;
       border-radius: var(--radius);
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 1.5px;
+      transition: all 0.25s ease;
       text-align: center;
       line-height: 1.2;
+      position: relative;
+      box-shadow: 0 4px 16px var(--orange-glow);
     }
-
-    .btn-cta:hover { background: var(--color-accent-hover); transform: translateY(-1px); }
+    .btn-cta:hover {
+      background: var(--orange-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--orange-glow);
+    }
     .btn-cta:active { transform: translateY(0); }
+
+    /* Pulse animation on CTA */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 4px 16px var(--orange-glow), 0 0 0 0 var(--orange-glow); }
+      70% { box-shadow: 0 4px 16px var(--orange-glow), 0 0 0 12px rgba(255,107,53,0); }
+      100% { box-shadow: 0 4px 16px var(--orange-glow), 0 0 0 0 rgba(255,107,53,0); }
+    }
+    .btn-cta--pulse { animation: pulse-ring 2s ease-out infinite; }
 
     /* ===== TOP BAR ===== */
     .top-bar {
-      background: var(--color-primary);
-      padding: 12px 0;
+      background: var(--navy);
+      padding: 10px 0;
+      border-bottom: 2px solid var(--orange);
     }
-
-    .top-bar__inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    .top-bar__inner { display: flex; justify-content: space-between; align-items: center; }
     .top-bar__logo {
-      color: var(--color-white);
-      font-weight: 800;
-      font-size: 16px;
-      letter-spacing: 1.5px;
+      color: var(--white);
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
-
+    .top-bar__logo span { color: var(--orange); }
     .top-bar__phone {
-      color: var(--color-secondary);
+      color: var(--white);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
+      font-weight: 700;
+      font-size: 15px;
       display: flex;
       align-items: center;
       gap: 6px;
       transition: color 0.2s;
+      background: rgba(255,255,255,0.08);
+      padding: 6px 14px;
+      border-radius: 6px;
     }
-
-    .top-bar__phone:hover { color: var(--color-white); }
-
-    .top-bar__phone svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
+    .top-bar__phone:hover { background: rgba(255,255,255,0.15); }
+    .top-bar__phone svg { width: 16px; height: 16px; fill: var(--orange); }
 
     /* ===== HERO ===== */
     .hero {
       position: relative;
-      background: var(--color-primary-dark);
-      /* Replace with your hero image: background-image: url('hero-bg.webp'); */
+      background: var(--navy);
+      /* REPLACE: background-image: url('hero-bg.webp'); */
       background-size: cover;
       background-position: center;
-      padding: 40px 0 48px;
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
+      padding: 32px 0 40px;
+      overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(15,29,53,0.93), rgba(27,42,74,0.88));
+      background: linear-gradient(160deg, rgba(13,27,42,0.96) 0%, rgba(27,42,74,0.90) 50%, rgba(13,27,42,0.95) 100%);
       z-index: 1;
     }
-
-    .hero .container { position: relative; z-index: 2; }
-
-    .hero__grid {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
+    /* Subtle animated gradient accent */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%);
+      z-index: 1;
+      border-radius: 50%;
     }
+    .hero .container { position: relative; z-index: 2; }
+    .hero__grid { display: flex; flex-direction: column; gap: 24px; }
+    .hero__content { color: var(--white); }
 
-    .hero__content { color: var(--color-white); }
+    .hero__urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,107,53,0.15);
+      border: 1px solid rgba(255,107,53,0.3);
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .hero__urgency-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
 
     .hero h1 {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 16px;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.12;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 .highlight {
+      color: var(--orange);
+      position: relative;
+    }
+    .hero h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--orange);
+      opacity: 0.4;
+      border-radius: 2px;
     }
 
-    .hero h1 span { color: var(--color-accent); }
-
     .hero__sub {
-      font-size: 17px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.8);
       margin-bottom: 20px;
       max-width: 520px;
     }
 
-    .hero__badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    .hero__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
       margin-bottom: 8px;
     }
-
-    .hero__badges span {
-      font-size: 13px;
+    .hero__stat {
+      text-align: center;
+      padding: 10px 4px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+    }
+    .hero__stat-number {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .hero__stat-label {
+      font-size: 11px;
       font-weight: 600;
-      color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.1);
-      padding: 6px 14px;
-      border-radius: 20px;
-      white-space: nowrap;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     /* ===== FORM CARD ===== */
     .form-card {
-      background: var(--color-white);
-      border-radius: 12px;
-      padding: 28px 24px;
-      box-shadow: var(--shadow-form);
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
     }
-
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), #FF8F65);
+    }
     .form-card__title {
       font-size: 22px;
-      font-weight: 800;
-      color: var(--color-primary);
+      font-weight: 900;
+      color: var(--navy);
       text-align: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
+      margin-top: 4px;
     }
-
     .form-card__sub {
       text-align: center;
-      color: var(--color-text-light);
       font-size: 14px;
       margin-bottom: 20px;
     }
-
-    .form-group {
-      margin-bottom: 14px;
-      position: relative;
-    }
-
+    .form-card__sub .green { color: var(--green); font-weight: 700; }
+    .form-group { margin-bottom: 12px; }
     .form-group input {
       width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #E0E0E0;
+      padding: 15px 16px;
+      border: 2px solid #E5E7EB;
       border-radius: var(--radius);
-      font-family: var(--font-primary);
+      font-family: var(--font);
       font-size: 16px;
-      color: var(--color-text);
-      transition: border-color 0.2s;
-      outline: none;
-    }
-
-    .form-group input:focus { border-color: var(--color-primary); }
-    .form-group input.error { border-color: #E53935; }
-
-    .form-group .error-msg {
-      display: none;
-      color: #E53935;
-      font-size: 12px;
-      margin-top: 4px;
       font-weight: 500;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      background: var(--off-white);
     }
-
+    .form-group input::placeholder { color: #9CA3AF; font-weight: 500; }
+    .form-group input:focus { border-color: var(--navy-mid); box-shadow: 0 0 0 3px rgba(27,42,74,0.1); background: var(--white); }
+    .form-group input.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
+    .error-msg { display: none; color: var(--red); font-size: 12px; margin-top: 4px; font-weight: 600; }
     .form-group input.error ~ .error-msg { display: block; }
-
+    .form-card .btn-cta { margin-top: 6px; font-size: 16px; }
     .form-card__privacy {
       text-align: center;
-      font-size: 12px;
-      color: var(--color-text-light);
+      font-size: 11px;
+      color: var(--text-light);
       margin-top: 12px;
-    }
-
-    .form-card .btn-cta { margin-top: 4px; }
-
-    /* ===== TRUST BAR ===== */
-    .trust-bar {
-      background: var(--color-primary);
-      padding: 24px 0;
-    }
-
-    .trust-bar__inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      text-align: center;
-    }
-
-    .trust-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--color-white);
-    }
-
-    .trust-item svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--color-accent);
-    }
-
-    .trust-item span {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* ===== BENEFITS ===== */
-    .benefits {
-      padding: 56px 0;
-      background: var(--color-white);
-    }
-
-    .benefits__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .benefit-card {
-      text-align: center;
-      padding: 28px 20px;
-      background: var(--color-bg-light);
-      border-radius: var(--radius);
-      transition: transform 0.2s;
-    }
-
-    .benefit-card:hover { transform: translateY(-2px); }
-
-    .benefit-card__icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 16px;
-      background: var(--color-primary);
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 4px;
     }
+    .form-card__privacy svg { width: 12px; height: 12px; fill: var(--text-light); flex-shrink: 0; }
 
-    .benefit-card__icon svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--color-accent);
+    /* ===== SOCIAL PROOF BAR ===== */
+    .social-proof {
+      background: var(--navy-mid);
+      padding: 16px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
-
-    .benefit-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 8px;
-    }
-
-    .benefit-card p {
-      font-size: 14px;
-      color: var(--color-text-light);
-      line-height: 1.6;
-    }
-
-    /* ===== BEFORE/AFTER ===== */
-    .before-after {
-      padding: 56px 0;
-      background: var(--color-bg-light);
-    }
-
-    .before-after__grid {
+    .social-proof__inner {
       display: flex;
-      flex-direction: column;
-      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
+    .social-proof__stars { color: var(--star); font-size: 18px; letter-spacing: 2px; }
+    .social-proof__text { color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 600; }
+    .social-proof__text strong { color: var(--white); }
 
-    .ba-pair {
+    /* ===== TRUST BAR ===== */
+    .trust-bar { background: var(--white); padding: 20px 0; border-bottom: 1px solid #E5E7EB; }
+    .trust-bar__inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--off-white);
+      border-radius: var(--radius);
+    }
+    .trust-item__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-item__icon svg { width: 20px; height: 20px; fill: var(--orange); }
+    .trust-item__text { font-size: 13px; font-weight: 700; color: var(--navy); line-height: 1.3; }
 
+    /* ===== SECTION STYLES ===== */
+    .section { padding: 56px 0; }
+    .section--gray { background: var(--light-gray); }
+    .section--navy { background: var(--navy); }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .section-title--white { color: var(--white); }
+    .section-subtitle {
+      color: var(--text-mid);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+    .text-center { text-align: center; }
+
+    /* ===== BENEFITS ===== */
+    .benefits__grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .benefit-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #E5E7EB;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .benefit-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .benefit-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .benefit-card__icon svg { width: 24px; height: 24px; fill: var(--orange); }
+    .benefit-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .benefit-card p { font-size: 14px; color: var(--text-mid); line-height: 1.55; }
+
+    /* ===== BEFORE/AFTER ===== */
+    .ba-grid { display: flex; flex-direction: column; gap: 24px; }
+    .ba-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .ba-image {
       position: relative;
       aspect-ratio: 4/3;
-      background: #D0D0D0;
+      background: linear-gradient(135deg, #D0D0D0, #E5E5E5);
       border-radius: var(--radius);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       color: #999;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
-
-    /* Replace these placeholders with real images:
-       <img loading="lazy" width="800" height="600" alt="House before washing" src="before-1.webp"> */
-
     .ba-label {
       position: absolute;
       top: 8px;
       left: 8px;
-      background: var(--color-primary);
-      color: var(--color-white);
       padding: 4px 12px;
       border-radius: 4px;
-      font-weight: 700;
-      font-size: 12px;
+      font-weight: 800;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-
-    .ba-image--after .ba-label { background: var(--color-accent); }
-
-    /* ===== HOW IT WORKS ===== */
-    .how-it-works {
-      padding: 56px 0;
-      background: var(--color-white);
-    }
-
-    .steps__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-
-    .step { text-align: center; }
-
-    .step__number {
-      width: 60px;
-      height: 60px;
+    .ba-image--before .ba-label { background: var(--navy); color: var(--white); }
+    .ba-image--after .ba-label { background: var(--green); color: var(--white); }
+    .ba-arrow {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      background: var(--orange);
       border-radius: 50%;
-      background: var(--color-accent);
-      color: var(--color-white);
-      font-size: 24px;
-      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
+      z-index: 2;
+      box-shadow: var(--shadow-md);
     }
-
-    .step h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      font-size: 14px;
-      color: var(--color-text-light);
-      max-width: 280px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* ===== TESTIMONIALS ===== */
-    .testimonials {
-      padding: 56px 0;
-      background: var(--color-bg-light);
-    }
-
-    .testimonials__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .testimonial-card {
-      background: var(--color-white);
-      border-radius: var(--radius);
-      padding: 24px 20px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .testimonial-stars {
-      color: var(--color-star);
-      font-size: 18px;
-      margin-bottom: 12px;
-      letter-spacing: 2px;
-    }
-
-    .testimonial-text {
-      font-size: 15px;
-      color: var(--color-text);
-      line-height: 1.65;
-      margin-bottom: 12px;
+    .ba-arrow svg { width: 14px; height: 14px; fill: var(--white); }
+    .ba-caption {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 600;
       font-style: italic;
     }
 
-    .testimonial-author {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--color-primary);
+    /* ===== HOW IT WORKS ===== */
+    .steps__grid { display: grid; grid-template-columns: 1fr; gap: 20px; counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--off-white);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--orange);
     }
+    .step__number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .step p { font-size: 14px; color: var(--text-mid); line-height: 1.55; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials__grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #E5E7EB;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 48px;
+      color: var(--orange);
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .testimonial-stars { color: var(--star); font-size: 16px; margin-bottom: 10px; letter-spacing: 1px; }
+    .testimonial-text { font-size: 14px; color: var(--text); line-height: 1.65; margin-bottom: 12px; }
+    .testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .testimonial-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .testimonial-author__info .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .testimonial-author__info .location { font-size: 12px; color: var(--text-light); }
+    .testimonial-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .testimonial-verified svg { width: 12px; height: 12px; fill: var(--green); }
+
+    /* ===== FAQ / OBJECTION HANDLING ===== */
+    .faq__list { max-width: 680px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid #E5E7EB;
+      padding: 18px 0;
+    }
+    .faq-item:first-child { border-top: 1px solid #E5E7EB; }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 12px;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      padding: 0;
+    }
+    .faq-q svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--text-light);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-q[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-a.open { max-height: 200px; padding-top: 10px; }
+    .faq-a p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
 
     /* ===== SERVICE AREA ===== */
-    .service-area {
-      padding: 48px 0;
-      background: var(--color-primary);
-      color: var(--color-white);
-      text-align: center;
-    }
-
-    .service-area .section-title { color: var(--color-white); }
-
     .service-area__text {
       font-size: 15px;
       line-height: 1.7;
-      color: rgba(255,255,255,0.85);
-      max-width: 700px;
-      margin: 16px auto 0;
+      color: rgba(255,255,255,0.8);
+      max-width: 660px;
+      margin: 0 auto;
+      text-align: center;
     }
-
-    .service-area__text strong { color: var(--color-white); }
+    .service-area__text strong { color: var(--white); }
+    .service-area__cities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .service-area__city {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+    }
 
     /* ===== FINAL CTA ===== */
-    .final-cta {
-      padding: 56px 0;
-      background: var(--color-bg-light);
-    }
-
+    .final-cta { padding: 56px 0; background: var(--light-gray); }
     .final-cta__inner { text-align: center; }
+    .final-cta__inner h2 { font-size: 28px; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .final-cta__inner > p { color: var(--text-mid); font-size: 15px; margin-bottom: 24px; }
+    .form-card--bottom { max-width: 440px; margin: 0 auto; }
 
-    .final-cta h2 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--color-primary);
-      margin-bottom: 8px;
+    /* ===== GUARANTEE BAR ===== */
+    .guarantee {
+      background: var(--green-bg);
+      border: 2px solid rgba(34,197,94,0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 600px;
+      margin: 32px auto 0;
     }
-
-    .final-cta p {
-      color: var(--color-text-light);
-      font-size: 16px;
-      margin-bottom: 28px;
+    .guarantee__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-
-    .form-card--bottom {
-      max-width: 440px;
-      margin: 0 auto;
-    }
+    .guarantee__icon svg { width: 24px; height: 24px; fill: var(--white); }
+    .guarantee__text h4 { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 2px; }
+    .guarantee__text p { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
 
     /* ===== FOOTER ===== */
     .footer {
-      background: var(--color-primary-dark);
-      padding: 32px 0;
-      padding-bottom: 100px; /* space for sticky CTA on mobile */
+      background: var(--navy);
+      padding: 28px 0;
+      padding-bottom: 90px;
       text-align: center;
+      border-top: 3px solid var(--orange);
     }
-
-    .footer__name {
-      color: var(--color-white);
-      font-weight: 700;
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .footer__phone a {
-      color: var(--color-secondary);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .footer__phone a:hover { color: var(--color-white); }
-
-    .footer__badge {
-      color: rgba(255,255,255,0.5);
-      font-size: 13px;
-      margin-top: 8px;
-    }
-
-    .footer__copy {
-      color: rgba(255,255,255,0.35);
-      font-size: 12px;
-      margin-top: 12px;
-    }
+    .footer__name { color: var(--white); font-weight: 800; font-size: 15px; margin-bottom: 4px; letter-spacing: 1px; text-transform: uppercase; }
+    .footer__phone a { color: var(--silver); text-decoration: none; font-weight: 600; font-size: 15px; }
+    .footer__phone a:hover { color: var(--white); }
+    .footer__badge { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 6px; }
+    .footer__copy { color: rgba(255,255,255,0.25); font-size: 11px; margin-top: 8px; }
 
     /* ===== STICKY MOBILE CTA ===== */
     .sticky-cta {
@@ -596,95 +685,80 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      padding: 12px 16px;
-      background: var(--color-white);
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      background: var(--white);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
       transform: translateY(100%);
       transition: transform 0.3s ease;
     }
-
-    .sticky-cta .btn-cta { font-size: 15px; padding: 14px 24px; }
+    .sticky-cta__inner { display: flex; gap: 8px; align-items: center; max-width: 500px; margin: 0 auto; }
+    .sticky-cta__text { font-size: 12px; font-weight: 700; color: var(--navy); line-height: 1.3; white-space: nowrap; }
+    .sticky-cta .btn-cta { font-size: 14px; padding: 12px 16px; letter-spacing: 0.5px; flex: 1; }
 
     /* ===== FORM SUCCESS ===== */
-    .form-success {
-      text-align: center;
-      padding: 24px 0;
-    }
-
+    .form-success { text-align: center; padding: 20px 0; }
     .form-success__icon {
-      width: 56px;
-      height: 56px;
-      background: #4CAF50;
+      width: 60px;
+      height: 60px;
+      background: var(--green);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
+      margin: 0 auto 14px;
+      animation: pop 0.4s ease;
     }
-
-    .form-success__icon svg { width: 28px; height: 28px; fill: white; }
-
-    .form-success h3 {
-      font-size: 20px;
+    @keyframes pop {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .form-success__icon svg { width: 30px; height: 30px; fill: white; }
+    .form-success h3 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .form-success p { font-size: 14px; color: var(--text-mid); }
+    .form-success__phone { margin-top: 12px; }
+    .form-success__phone a {
+      color: var(--orange);
       font-weight: 700;
-      color: var(--color-primary);
-      margin-bottom: 8px;
+      text-decoration: none;
+      font-size: 16px;
     }
 
-    .form-success p {
-      font-size: 14px;
-      color: var(--color-text-light);
-    }
-
-    /* ===== DESKTOP (768px+) ===== */
+    /* ===== DESKTOP ===== */
     @media (min-width: 768px) {
-      .hero {
-        padding: 60px 0;
-        min-height: auto;
-      }
-
+      .hero { padding: 56px 0; }
       .hero__grid {
         display: grid;
         grid-template-columns: 1fr 400px;
         gap: 48px;
         align-items: center;
       }
-
-      .hero h1 { font-size: 42px; }
-
+      .hero h1 { font-size: 40px; }
       .section-title { font-size: 34px; }
-
-      .trust-bar__inner {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0;
-      }
-
+      .trust-bar__inner { grid-template-columns: repeat(4, 1fr); }
       .benefits__grid { grid-template-columns: repeat(2, 1fr); }
-
       .steps__grid { grid-template-columns: repeat(3, 1fr); }
-
+      .step { flex-direction: column; text-align: center; align-items: center; border-left: none; border-top: 4px solid var(--orange); }
       .testimonials__grid { grid-template-columns: repeat(3, 1fr); }
-
-      .ba-pair { gap: 20px; }
-
-      .before-after__grid { flex-direction: row; gap: 24px; }
-
+      .ba-grid { flex-direction: row; gap: 20px; }
+      .ba-pair { gap: 12px; }
       .sticky-cta { display: none; }
-
-      .footer { padding-bottom: 32px; }
+      .footer { padding-bottom: 28px; }
     }
-
     @media (min-width: 1024px) {
+      .hero h1 { font-size: 46px; }
       .benefits__grid { grid-template-columns: repeat(4, 1fr); }
+      .benefit-card { flex-direction: column; text-align: center; align-items: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== TOP BAR ===== -->
+  <!-- TOP BAR -->
   <header class="top-bar">
     <div class="container top-bar__inner">
-      <div class="top-bar__logo">Platinum Power Wash</div>
+      <div class="top-bar__logo"><span>Platinum</span> Power Wash</div>
       <a href="tel:+14075041577" class="top-bar__phone" aria-label="Call Platinum Power Wash">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.1.31.03.66-.25 1.01l-2.2 2.2z"/></svg>
         (407) 504-1577
@@ -692,22 +766,35 @@
     </div>
   </header>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="hero" id="top">
     <div class="container hero__grid">
       <div class="hero__content">
-        <h1>Orlando's <span>#1 Rated</span><br>House Washing Service</h1>
-        <p class="hero__sub">Restore your home's curb appeal with our safe, professional soft wash system. No harsh pressure — just a thorough clean that lasts.</p>
-        <div class="hero__badges">
-          <span>&#10003; Licensed &amp; Insured</span>
-          <span>&#10003; 4.8&#9733; on Google</span>
-          <span>&#10003; 100% Satisfaction Guaranteed</span>
+        <div class="hero__urgency">
+          <span class="hero__urgency-dot"></span>
+          Limited Availability This Month
+        </div>
+        <h1>Orlando's <span class="highlight">#1 Rated</span> House Washing Service</h1>
+        <p class="hero__sub">Remove years of dirt, mold &amp; algae with our safe soft wash system. Your home will look brand new — <strong style="color:#fff">guaranteed</strong>.</p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-number">4.8</span>
+            <span class="hero__stat-label">Google Rating</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">500+</span>
+            <span class="hero__stat-label">Homes Washed</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">100%</span>
+            <span class="hero__stat-label">Satisfaction</span>
+          </div>
         </div>
       </div>
       <div class="hero__form-wrapper" id="quote-form-top">
         <div class="form-card">
           <h2 class="form-card__title">Get Your FREE Quote</h2>
-          <p class="form-card__sub">We respond within 30 minutes</p>
+          <p class="form-card__sub"><span class="green">&#9679;</span> We respond within <strong>30 minutes</strong></p>
           <form id="lead-form-top" novalidate>
             <div class="form-group">
               <label for="name-top" class="sr-only">Your Name</label>
@@ -719,172 +806,322 @@
               <input type="tel" id="phone-top" name="phone" placeholder="Phone Number" required autocomplete="tel">
               <span class="error-msg">Please enter a valid 10-digit phone number</span>
             </div>
-            <button type="submit" class="btn-cta">Get My Free Quote &#8594;</button>
+            <button type="submit" class="btn-cta btn-cta--pulse">Get My Free Quote &#8594;</button>
           </form>
-          <p class="form-card__privacy">&#128274; Your info is safe. No spam, ever.</p>
+          <p class="form-card__privacy">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/></svg>
+            100% private. No spam. Unsubscribe anytime.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== TRUST BAR ===== -->
+  <!-- SOCIAL PROOF BAR -->
+  <div class="social-proof">
+    <div class="container social-proof__inner">
+      <span class="social-proof__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="social-proof__text">Rated <strong>4.8/5</strong> from <strong>127+ reviews</strong> on Google</span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
   <section class="trust-bar">
     <div class="container trust-bar__inner">
       <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
-        <span>Licensed &amp; Insured</span>
+        <div class="trust-item__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+        </div>
+        <span class="trust-item__text">Licensed &amp;<br>Insured</span>
       </div>
       <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        <span>4.8&#9733; Google Rating</span>
+        <div class="trust-item__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </div>
+        <span class="trust-item__text">Same-Week<br>Scheduling</span>
       </div>
       <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-        <span>100% Satisfaction Guarantee</span>
+        <div class="trust-item__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+        <span class="trust-item__text">Satisfaction<br>Guaranteed</span>
       </div>
       <div class="trust-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
-        <span>Free Estimates</span>
+        <div class="trust-item__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>
+        </div>
+        <span class="trust-item__text">Free<br>Estimates</span>
       </div>
     </div>
   </section>
 
-  <!-- ===== BENEFITS ===== -->
-  <section class="benefits">
+  <!-- BENEFITS -->
+  <section class="section">
     <div class="container">
-      <h2 class="section-title">Why Orlando Homeowners Choose Us</h2>
-      <p class="section-subtitle">Professional house washing that protects your biggest investment</p>
+      <div class="text-center">
+        <span class="section-label">Why Choose Us</span>
+        <h2 class="section-title">Orlando Homeowners Trust Platinum Power Wash</h2>
+        <p class="section-subtitle">Professional house washing that protects your biggest investment</p>
+      </div>
       <div class="benefits__grid">
         <div class="benefit-card">
           <div class="benefit-card__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm0 2.84L18 12v7h-2v-6H8v6H6v-7l6-6.16z"/><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
           </div>
-          <h3>Boost Your Curb Appeal</h3>
-          <p>Your home will look brand new. Remove years of dirt, mold, and algae buildup in just one visit.</p>
+          <div>
+            <h3>Instant Curb Appeal</h3>
+            <p>Your home will look brand new. We remove years of dirt, mold, and algae in a single visit.</p>
+          </div>
         </div>
         <div class="benefit-card">
           <div class="benefit-card__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
           </div>
-          <h3>Protect Your Home's Value</h3>
-          <p>Mold and mildew eat away at siding. Regular washing prevents costly damage and extends your home's life.</p>
+          <div>
+            <h3>Protect Your Home's Value</h3>
+            <p>Mold and mildew eat away at siding. Regular washing prevents costly repairs and extends its life by years.</p>
+          </div>
         </div>
         <div class="benefit-card">
           <div class="benefit-card__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.66 8L12 2.35 6.34 8A8.02 8.02 0 004 13.64c0 2 .78 4.11 2.34 5.67a7.99 7.99 0 0011.32 0c1.56-1.56 2.34-3.67 2.34-5.67C20 11.22 19.22 9.56 17.66 8zM6 14c.01-2 .62-3.27 1.76-4.4L12 5.27l4.24 4.38C17.38 10.77 17.99 12 18 14H6z"/></svg>
           </div>
-          <h3>Safe Soft Wash System</h3>
-          <p>Our low-pressure technique cleans thoroughly without damaging your siding, paint, or landscaping.</p>
+          <div>
+            <h3>Safe Soft Wash System</h3>
+            <p>No harsh pressure that damages siding. Our low-pressure technique is safe for paint, vinyl, stucco &amp; landscaping.</p>
+          </div>
         </div>
         <div class="benefit-card">
           <div class="benefit-card__icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
           </div>
-          <h3>Healthier Home Environment</h3>
-          <p>Eliminate allergens, mold spores, and bacteria from your home's exterior. Breathe easier inside and out.</p>
+          <div>
+            <h3>Healthier Living Space</h3>
+            <p>Eliminate mold spores, allergens, and bacteria from your home's exterior. Your family breathes easier.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== BEFORE / AFTER ===== -->
-  <section class="before-after">
+  <!-- BEFORE / AFTER -->
+  <section class="section section--gray">
     <div class="container">
-      <h2 class="section-title">See the Difference</h2>
-      <p class="section-subtitle">Real results from real Orlando homes</p>
-      <div class="before-after__grid">
-        <!-- Replace placeholder divs with <img loading="lazy" width="800" height="600" alt="..." src="photo.webp"> -->
+      <div class="text-center">
+        <span class="section-label">Real Results</span>
+        <h2 class="section-title">See the Platinum Difference</h2>
+        <p class="section-subtitle">Actual results from Orlando homes — no filters, no tricks</p>
+      </div>
+      <!-- Replace placeholder divs with <img loading="lazy" width="800" height="600" alt="..." src="photo.webp"> -->
+      <div class="ba-grid">
         <div class="ba-pair">
           <div class="ba-image ba-image--before" role="img" aria-label="House siding before washing">
             <span class="ba-label">Before</span>
             Before Photo
+            <div class="ba-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
           </div>
           <div class="ba-image ba-image--after" role="img" aria-label="House siding after washing">
             <span class="ba-label">After</span>
             After Photo
           </div>
+          <p class="ba-caption">Orlando home — vinyl siding soft wash</p>
         </div>
         <div class="ba-pair">
           <div class="ba-image ba-image--before" role="img" aria-label="Home exterior before washing">
             <span class="ba-label">Before</span>
             Before Photo
+            <div class="ba-arrow"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
           </div>
           <div class="ba-image ba-image--after" role="img" aria-label="Home exterior after washing">
             <span class="ba-label">After</span>
             After Photo
           </div>
+          <p class="ba-caption">Winter Park home — stucco exterior wash</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="how-it-works">
+  <!-- HOW IT WORKS -->
+  <section class="section">
     <div class="container">
-      <h2 class="section-title">How It Works</h2>
-      <p class="section-subtitle">Getting a clean home is easy as 1-2-3</p>
+      <div class="text-center">
+        <span class="section-label">Simple Process</span>
+        <h2 class="section-title">A Cleaner Home in 3 Easy Steps</h2>
+        <p class="section-subtitle">No hassle, no commitment — just results</p>
+      </div>
       <div class="steps__grid">
         <div class="step">
           <div class="step__number">1</div>
-          <h3>Request Your Free Quote</h3>
-          <p>Fill out the quick form or give us a call. We'll get back to you within 30 minutes.</p>
+          <div>
+            <h3>Request Your Free Quote</h3>
+            <p>Fill out the 30-second form above. We'll call you within 30 minutes with a no-obligation estimate.</p>
+          </div>
         </div>
         <div class="step">
           <div class="step__number">2</div>
-          <h3>We Wash Your Home</h3>
-          <p>Our trained crew arrives on time and soft washes your entire home — safely and thoroughly.</p>
+          <div>
+            <h3>We Wash Your Home</h3>
+            <p>Our trained crew arrives on schedule and soft washes your entire home — safely and thoroughly.</p>
+          </div>
         </div>
         <div class="step">
           <div class="step__number">3</div>
-          <h3>Enjoy the Results</h3>
-          <p>Step back and admire your home's transformation. 100% satisfaction guaranteed.</p>
+          <div>
+            <h3>Love Your Clean Home</h3>
+            <p>Walk around and admire the transformation. Not happy? We come back and fix it — free.</p>
+          </div>
+        </div>
+      </div>
+      <div class="guarantee">
+        <div class="guarantee__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+        </div>
+        <div class="guarantee__text">
+          <h4>100% Satisfaction Guarantee</h4>
+          <p>If you're not completely thrilled with the results, we'll re-wash your home at no additional cost. That's our promise.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== TESTIMONIALS ===== -->
-  <!-- IMPORTANT: Replace these sample testimonials with real customer reviews -->
-  <section class="testimonials">
+  <!-- TESTIMONIALS -->
+  <section class="section section--gray">
     <div class="container">
-      <h2 class="section-title">What Our Customers Say</h2>
-      <p class="section-subtitle">Trusted by Orlando homeowners</p>
+      <div class="text-center">
+        <span class="section-label">Reviews</span>
+        <h2 class="section-title">Don't Take Our Word for It</h2>
+        <p class="section-subtitle">Hear from Orlando homeowners who made the call</p>
+      </div>
+      <!-- Replace with your real Google reviews -->
       <div class="testimonials__grid">
         <div class="testimonial-card">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"They made our house look brand new! The team was professional, on time, and the results were unbelievable. Highly recommend to anyone in Orlando."</p>
-          <p class="testimonial-author">— Sarah M., Winter Park</p>
+          <p class="testimonial-text">"They made our house look brand new! The team was professional, on time, and the results were unbelievable. Our neighbors keep asking who we used."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div class="testimonial-author__info">
+              <div class="name">Sarah M.</div>
+              <div class="location">Winter Park, FL</div>
+              <div class="testimonial-verified">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Verified Customer
+              </div>
+            </div>
+          </div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"I couldn't believe the difference. Years of green algae and grime — gone in one afternoon. Fair price, great communication. Will use again."</p>
-          <p class="testimonial-author">— James R., Lake Nona</p>
+          <p class="testimonial-text">"I couldn't believe the difference. Years of green algae and grime — gone in one afternoon. Fair price, great communication. Already booked them for next year."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JR</div>
+            <div class="testimonial-author__info">
+              <div class="name">James R.</div>
+              <div class="location">Lake Nona, FL</div>
+              <div class="testimonial-verified">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Verified Customer
+              </div>
+            </div>
+          </div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"Best house washing company we've used. They took the time to explain their soft wash process and the results speak for themselves."</p>
-          <p class="testimonial-author">— Linda T., Dr. Phillips</p>
+          <p class="testimonial-text">"Best house washing company we've ever hired. They explained their soft wash process, showed up when they said they would, and the results speak for themselves."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">LT</div>
+            <div class="testimonial-author__info">
+              <div class="name">Linda T.</div>
+              <div class="location">Dr. Phillips, FL</div>
+              <div class="testimonial-verified">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Verified Customer
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SERVICE AREA ===== -->
-  <section class="service-area">
+  <!-- FAQ / OBJECTION HANDLING -->
+  <section class="section">
     <div class="container">
-      <h2 class="section-title">Proudly Serving Orlando &amp; Surrounding Areas</h2>
-      <p class="service-area__text">
-        Platinum Power Wash provides professional house washing throughout the Greater Orlando area including
-        <strong>Winter Park, Dr. Phillips, Lake Nona, Windermere, Kissimmee, Sanford, Oviedo, Altamonte Springs, Casselberry,</strong> and more.
-      </p>
+      <div class="text-center">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Common Questions</h2>
+        <p class="section-subtitle">Everything you need to know before booking</p>
+      </div>
+      <div class="faq__list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            Will pressure washing damage my siding or paint?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Not with our method. We use a low-pressure soft wash system — not traditional high-pressure washing. It's safe for vinyl, stucco, painted wood, brick, and even delicate surfaces. The cleaning power comes from our professional-grade, eco-friendly solutions, not brute force.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            How much does house washing cost?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Most Orlando homes cost between $200–$500 depending on size, condition, and story count. We provide free, no-obligation quotes — just fill out the form above and we'll call you with an exact price within 30 minutes.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            How long does it take?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Most homes take 1–3 hours depending on size. You don't need to be home — just make sure we can access all sides of the house and any gates are unlocked.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            Is it safe for my plants and landscaping?
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+          </button>
+          <div class="faq-a">
+            <p>Yes! We pre-rinse and protect your landscaping before we start. Our cleaning solutions are biodegradable and plant-safe. We take extra care around flower beds, shrubs, and outdoor furniture.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ===== FINAL CTA ===== -->
+  <!-- SERVICE AREA -->
+  <section class="section section--navy">
+    <div class="container text-center">
+      <span class="section-label">Service Area</span>
+      <h2 class="section-title section-title--white">Proudly Serving Orlando &amp; Surrounding Areas</h2>
+      <p class="service-area__text">Platinum Power Wash provides professional house washing throughout the Greater Orlando metro.</p>
+      <div class="service-area__cities">
+        <span class="service-area__city">Orlando</span>
+        <span class="service-area__city">Winter Park</span>
+        <span class="service-area__city">Dr. Phillips</span>
+        <span class="service-area__city">Lake Nona</span>
+        <span class="service-area__city">Windermere</span>
+        <span class="service-area__city">Kissimmee</span>
+        <span class="service-area__city">Sanford</span>
+        <span class="service-area__city">Oviedo</span>
+        <span class="service-area__city">Altamonte Springs</span>
+        <span class="service-area__city">Casselberry</span>
+        <span class="service-area__city">Winter Garden</span>
+        <span class="service-area__city">Clermont</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
   <section class="final-cta">
     <div class="container final-cta__inner">
-      <h2>Ready for a Cleaner Home?</h2>
-      <p>Get your free, no-obligation quote in minutes.</p>
+      <span class="section-label">Get Started</span>
+      <h2>Ready for a Home That Looks Brand New?</h2>
+      <p>Get your free, no-obligation quote. Takes 30 seconds.</p>
       <div class="form-card form-card--bottom">
         <form id="lead-form-bottom" novalidate>
           <div class="form-group">
@@ -897,27 +1134,30 @@
             <input type="tel" id="phone-bottom" name="phone" placeholder="Phone Number" required autocomplete="tel">
             <span class="error-msg">Please enter a valid 10-digit phone number</span>
           </div>
-          <button type="submit" class="btn-cta">Get My Free Quote &#8594;</button>
+          <button type="submit" class="btn-cta btn-cta--pulse">Get My Free Quote &#8594;</button>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <p class="footer__name">Platinum Power Wash</p>
       <p class="footer__phone"><a href="tel:+14075041577">(407) 504-1577</a></p>
-      <p class="footer__badge">Licensed &amp; Insured &bull; Orlando, FL</p>
+      <p class="footer__badge">Licensed &amp; Insured &#8226; Orlando, FL</p>
       <p class="footer__copy">&copy; 2026 Platinum Power Wash. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- ===== STICKY MOBILE CTA ===== -->
+  <!-- STICKY MOBILE CTA -->
   <div class="sticky-cta" id="sticky-cta">
-    <button class="btn-cta" onclick="document.getElementById('quote-form-top').scrollIntoView({behavior:'smooth'})">
-      Get My Free Quote &#8594;
-    </button>
+    <div class="sticky-cta__inner">
+      <span class="sticky-cta__text">Free Quote<br>in 30 min</span>
+      <button class="btn-cta" onclick="document.getElementById('quote-form-top').scrollIntoView({behavior:'smooth'})">
+        Get My Free Quote &#8594;
+      </button>
+    </div>
   </div>
 
   <script>
@@ -926,54 +1166,34 @@
 
       // === Phone number formatting ===
       function formatPhone(value) {
-        var digits = value.replace(/\D/g, '');
-        if (digits.length > 10) digits = digits.substring(0, 10);
-        if (digits.length >= 7) {
-          return '(' + digits.substring(0,3) + ') ' + digits.substring(3,6) + '-' + digits.substring(6);
-        } else if (digits.length >= 4) {
-          return '(' + digits.substring(0,3) + ') ' + digits.substring(3);
-        } else if (digits.length > 0) {
-          return '(' + digits;
-        }
+        var d = value.replace(/\D/g, '');
+        if (d.length > 10) d = d.substring(0, 10);
+        if (d.length >= 7) return '(' + d.substring(0,3) + ') ' + d.substring(3,6) + '-' + d.substring(6);
+        if (d.length >= 4) return '(' + d.substring(0,3) + ') ' + d.substring(3);
+        if (d.length > 0) return '(' + d;
         return '';
       }
 
-      var phoneInputs = document.querySelectorAll('input[type="tel"]');
-      phoneInputs.forEach(function(input) {
+      document.querySelectorAll('input[type="tel"]').forEach(function(input) {
         input.addEventListener('input', function() {
-          var cursorPos = this.selectionStart;
-          var prevLen = this.value.length;
+          var pos = this.selectionStart;
+          var prev = this.value.length;
           this.value = formatPhone(this.value);
-          var newLen = this.value.length;
-          var newPos = cursorPos + (newLen - prevLen);
-          this.setSelectionRange(newPos, newPos);
+          var diff = this.value.length - prev;
+          this.setSelectionRange(pos + diff, pos + diff);
         });
       });
 
-      // === Form validation & submission ===
+      // === Form validation ===
       function validateForm(form) {
-        var nameInput = form.querySelector('input[name="name"]');
-        var phoneInput = form.querySelector('input[name="phone"]');
-        var valid = true;
-
-        // Reset errors
-        nameInput.classList.remove('error');
-        phoneInput.classList.remove('error');
-
-        // Validate name
-        if (!nameInput.value.trim()) {
-          nameInput.classList.add('error');
-          valid = false;
-        }
-
-        // Validate phone (10 digits)
-        var phoneDigits = phoneInput.value.replace(/\D/g, '');
-        if (phoneDigits.length !== 10) {
-          phoneInput.classList.add('error');
-          valid = false;
-        }
-
-        return valid;
+        var name = form.querySelector('input[name="name"]');
+        var phone = form.querySelector('input[name="phone"]');
+        var ok = true;
+        name.classList.remove('error');
+        phone.classList.remove('error');
+        if (!name.value.trim()) { name.classList.add('error'); ok = false; }
+        if (phone.value.replace(/\D/g, '').length !== 10) { phone.classList.add('error'); ok = false; }
+        return ok;
       }
 
       function showSuccess(form, name) {
@@ -981,14 +1201,14 @@
         card.innerHTML = '<div class="form-success">' +
           '<div class="form-success__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>' +
           '<h3>Thank You, ' + name + '!</h3>' +
-          '<p>We\'ll call you within 30 minutes.</p>' +
+          '<p>We\'ll call you within 30 minutes with your free quote.</p>' +
+          '<div class="form-success__phone">Or call us now: <a href="tel:+14075041577">(407) 504-1577</a></div>' +
           '</div>';
       }
 
       function handleSubmit(e) {
         e.preventDefault();
         var form = e.target;
-
         if (!validateForm(form)) return;
 
         var nameVal = form.querySelector('input[name="name"]').value.trim();
@@ -997,8 +1217,9 @@
 
         btn.textContent = 'Sending...';
         btn.disabled = true;
+        btn.classList.remove('btn-cta--pulse');
 
-        // n8n webhook endpoint — REPLACE with your actual n8n webhook URL
+        // n8n webhook — REPLACE with your actual webhook URL
         var WEBHOOK_URL = 'https://YOUR-N8N-INSTANCE.app/webhook/YOUR-WEBHOOK-ID';
 
         fetch(WEBHOOK_URL, {
@@ -1008,6 +1229,7 @@
             name: nameVal,
             phone: phoneVal,
             source: 'Google Ads - House Washing Orlando',
+            page: window.location.href,
             timestamp: new Date().toISOString()
           })
         }).then(function(res) {
@@ -1019,6 +1241,7 @@
         }).catch(function() {
           btn.textContent = 'Get My Free Quote \u2192';
           btn.disabled = false;
+          btn.classList.add('btn-cta--pulse');
           alert('Something went wrong. Please call us directly at (407) 504-1577.');
         });
       }
@@ -1026,26 +1249,31 @@
       document.getElementById('lead-form-top').addEventListener('submit', handleSubmit);
       document.getElementById('lead-form-bottom').addEventListener('submit', handleSubmit);
 
-      // Clear error on input
+      // Clear errors on input
       document.querySelectorAll('.form-group input').forEach(function(input) {
-        input.addEventListener('input', function() {
-          this.classList.remove('error');
-        });
+        input.addEventListener('input', function() { this.classList.remove('error'); });
       });
 
-      // === Sticky CTA visibility ===
+      // === Sticky CTA ===
       var stickyCta = document.getElementById('sticky-cta');
       var heroForm = document.getElementById('quote-form-top');
-
       if (stickyCta && heroForm && 'IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
+        var obs = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             stickyCta.style.transform = entry.isIntersecting ? 'translateY(100%)' : 'translateY(0)';
           });
         }, { threshold: 0 });
-        observer.observe(heroForm);
+        obs.observe(heroForm);
       }
     })();
+
+    // === FAQ toggle ===
+    function toggleFaq(btn) {
+      var answer = btn.nextElementSibling;
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      answer.classList.toggle('open');
+    }
   </script>
 </body>
 </html>
